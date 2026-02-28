@@ -33,33 +33,12 @@ POST an image → get back detected objects with confidence scores and bounding 
 - **YOLOv8n** — nano model, fast enough for CPU inference
 - **ONNX Runtime** — no PyTorch/CUDA required in the container
 - **FastAPI** — lightweight inference API with health endpoints
-- **Kubernetes** — 2-replica deployment with resource limits + network policies
-- **Docker Desktop** — local K8s cluster on MacBook Pro M3 Pro
-
----
-
-## Project Structure
-
-```
-yolo-k8s/
-├── app/
-│   ├── main.py               # FastAPI inference server
-│   ├── requirements.txt
-│   └── yolov8n.onnx          # exported model (~12MB)
-├── Dockerfile
-├── k8s/
-│   ├── deployment.yaml       # 2 replicas, CPU/memory limits
-│   ├── service.yaml          # NodePort on :30800
-│   └── networkpolicy.yaml    # restrict ingress/egress
-└── test/
-    └── test_inference.py
-```
+- **Kubernetes** — 2-replica deployment with resource limits 
 
 ---
 
 ## Running it locally
 
-**Prerequisites:** Docker Desktop with Kubernetes enabled.
 
 ```bash
 # 1. Export the ONNX model (one time)
