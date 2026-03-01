@@ -45,7 +45,6 @@ yolo-k8s/
 ├── app/
 │   ├── main.py               # FastAPI inference server
 │   ├── requirements.txt
-│   └── yolov8n.onnx          # exported model (~12MB)
 ├── Dockerfile
 ├── k8s/
 │   ├── deployment.yaml       # 2 replicas, CPU/memory limits
@@ -101,15 +100,13 @@ python test/test_inference.py
 
 ---
 
-## A few things I learned along the way
+## Few Important points
 
 - Building for `linux/amd64` on Apple Silicon without specifying CPU-only torch
   pulls in gigabytes of Nvidia CUDA packages you'll never use — explicitly install
   from `https://download.pytorch.org/whl/cpu` or just switch to ONNX Runtime
 - `python:3.11-slim` doesn't ship with `libGL.so.1` — OpenCV needs it, add `libgl1`
   to your apt installs
-- Docker Desktop K8s can access locally built images directly with
-  `imagePullPolicy: Never` — no need to push to a registry for local dev
 - Default-deny NetworkPolicy breaks DNS — always add an egress rule for port 53
 
 ---
